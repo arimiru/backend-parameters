@@ -40,6 +40,9 @@ A Helm chart for Kubernetes
 | env[2].name | string | `"ENV_VAR4"` |  |
 | env[2].valueFrom.secretKeyRef.key | string | `"ENV_VAR4"` |  |
 | env[2].valueFrom.secretKeyRef.name | string | `"secret-extra-config"` |  |
+| env[3].name | string | `"ENV_VAR5"` |  |
+| env[3].valueFrom.secretKeyRef.key | string | `"ENV_VAR5"` |  |
+| env[3].valueFrom.secretKeyRef.name | string | `"backend-parameters"` |  |
 | fullnameOverride | string | `""` |  |
 | image.digest | string | `""` | Image digest for immutable reference (e.g., sha256:abc123...). If set, deployed as :tag@digest. |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
@@ -78,6 +81,9 @@ A Helm chart for Kubernetes
 | volumeMounts[1].mountPath | string | `"/config"` |  |
 | volumeMounts[1].name | string | `"configmap-volume"` |  |
 | volumeMounts[1].readOnly | bool | `true` |  |
+| volumeMounts[2].mountPath | string | `"/ps-config"` |  |
+| volumeMounts[2].name | string | `"ps-volume"` |  |
+| volumeMounts[2].readOnly | bool | `true` |  |
 | volumes[0].name | string | `"secret-volume"` |  |
 | volumes[0].secret.items[0].key | string | `"application.secret.properties"` |  |
 | volumes[0].secret.items[0].path | string | `"application.secret.properties"` |  |
@@ -86,3 +92,7 @@ A Helm chart for Kubernetes
 | volumes[1].configMap.items[0].path | string | `"application.properties"` |  |
 | volumes[1].configMap.name | string | `"cm-extra-config"` |  |
 | volumes[1].name | string | `"configmap-volume"` |  |
+| volumes[2].name | string | `"ps-volume"` |  |
+| volumes[2].secret.items[0].key | string | `"application.secret.properties.from.ps"` |  |
+| volumes[2].secret.items[0].path | string | `"application.secret.properties.from.ps"` |  |
+| volumes[2].secret.secretName | string | `"backend-parameters"` |  |
