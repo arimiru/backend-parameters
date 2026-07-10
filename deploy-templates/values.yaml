@@ -105,6 +105,11 @@ env:
       secretKeyRef:
         name: secret-extra-config
         key: ENV_VAR4
+  - name: ENV_VAR5
+    valueFrom:
+      secretKeyRef:
+        name: backend-parameters
+        key: ENV_VAR5
 
 # Loads all key-value pairs from the referenced ConfigMap and Secret as environment variables.
 envFrom:
@@ -129,6 +134,12 @@ volumes:
         - key: application.properties
           # File name inside the mounted volume for this key.
           path: application.properties
+  - name: ps-volume
+    secret:
+      secretName: backend-parameters
+      items:
+        - key: application.secret.properties.from.ps
+          path: application.secret.properties.from.ps
 
 # Additional volumeMounts on the output Deployment definition.
 volumeMounts:
@@ -138,9 +149,9 @@ volumeMounts:
   - name: configmap-volume
     readOnly: true
     mountPath: "/config"
-# - name: foo
-#   mountPath: "/etc/foo"
-#   readOnly: true
+  - name: ps-volume
+    readOnly: true
+    mountPath: "/ps-config"
 
 # -- https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#nodeselector
 nodeSelector: {}
